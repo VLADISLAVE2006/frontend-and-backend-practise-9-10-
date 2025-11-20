@@ -8,9 +8,11 @@
 </head>
 <body>
     <div class="page-container">
-        <div class="header">Каталог товаров</div>
+        <header class="header">
+            <h1>Каталог товаров</h1>
+        </header>
         
-        <div class="nav">
+        <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
                 <li class="nav-item"><a class="nav-link" href="news.html">Новости</a></li>
@@ -18,36 +20,45 @@
                 <li class="nav-item"><a class="nav-link" href="goods.html">Товары</a></li>
                 <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
             </ul>
-        </div>
+        </nav>
         
-        <div class="content">
+        <main class="content">
             <h1 class="page-title">Наши товары</h1>
             
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="../images/goods1.jpg" alt="Смартфон XYZ" class="product-image">
-                    <h3 class="product-name">Умная Колонка</h3>
-                    <p class="product-price">25 000 ₽</p>
-                </div>
-                
-                <div class="product-card">
-                    <img src="../images/goods2.jpg" alt="Ноутбук ABC" class="product-image">
-                    <h3 class="product-name">Наушники GoPro</h3>
-                    <p class="product-price">12 000 ₽</p>
-                </div>
-                
-                <div class="product-card">
-                    <img src="../images/goods3.jpg" alt="Наушники Pro" class="product-image">
-                    <h3 class="product-name">Часы Sport</h3>
-                    <p class="product-price">8 500 ₽</p>
-                </div>
-                
-            </div>
-        </div>
+            <section class="products-section">
+                <table class="products-table">
+                    <tbody>
+                        <tr class="product-row">
+                            <td class="product-cell">
+                                <div class="table-product">
+                                    <img src="../images/goods1.jpg" alt="Умная Колонка" class="product-image">
+                                    <h3 class="table-product-name">Умная Колонка</h3>
+                                    <p class="table-product-price">25 000 ₽</p>
+                                </div>
+                            </td>
+                            <td class="product-cell">
+                                <div class="table-product">
+                                    <img src="../images/goods2.jpg" alt="Наушники GoPro" class="product-image">
+                                    <h3 class="table-product-name">Наушники GoPro</h3>
+                                    <p class="table-product-price">12 000 ₽</p>
+                                </div>
+                            </td>
+                            <td class="product-cell">
+                                <div class="table-product">
+                                    <img src="../images/goods3.jpg" alt="Часы Sport" class="product-image">
+                                    <h3 class="table-product-name">Часы Sport</h3>
+                                    <p class="table-product-price">8 500 ₽</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
         
-        <div class="footer">
-            © 2025 Практическая работа. Все права защищены.
-        </div>
+        <footer class="footer">
+            <p>© 2025 Практическая работа. Все права защищены.</p>
+        </footer>
     </div>
 </body>
 </html>

@@ -341,3 +341,246 @@ main.content {
         padding: 20px;
     }
 }
+
+/* ===== УЛУЧШЕННЫЕ СТИЛИ ДЛЯ НОВОСТЕЙ ===== */
+.news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.news-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+}
+
+.news-title {
+    font-size: 22px;
+    color: #2c3e50;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.news-meta {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    padding: 0;
+    border: none;
+}
+
+.news-meta strong {
+    color: #5a6c7d;
+    font-weight: 600;
+}
+
+.news-text {
+    color: #5a6c7d;
+    line-height: 1.7;
+    font-size: 16px;
+    margin: 0;
+    text-align: justify;
+}
+
+/* Убираем границы и лишние отступы */
+.news-card {
+    border-left: none;
+}
+
+/* Адаптивность для новостей */
+@media (max-width: 768px) {
+    .news-card {
+        padding: 20px;
+        margin: 0;
+    }
+    
+    .news-title {
+        font-size: 20px;
+    }
+    
+    .news-text {
+        font-size: 15px;
+        text-align: left;
+    }
+    
+    .news-meta {
+        font-size: 13px;
+    }
+}
+
+/* ===== СТИЛИ ДЛЯ ТАБЛИЦЫ ТОВАРОВ ===== */
+.products-section {
+    margin: 30px 0;
+}
+
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.product-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.product-cell {
+    padding: 0;
+    border: none;
+    text-align: center;
+}
+
+.table-product {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    min-width: 200px;
+    transition: all 0.3s ease;
+}
+
+.table-product:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.table-product-name {
+    font-size: 18px;
+    color: #2c3e50;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+.table-product-price {
+    font-size: 20px;
+    color: #e74c3c;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Адаптивность для таблицы товаров */
+@media (max-width: 768px) {
+    .product-row {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .table-product {
+        min-width: 250px;
+        padding: 25px 20px;
+    }
+    
+    .products-table {
+        width: 100%;
+    }
+}
+
+/* Убираем стандартные стили таблицы */
+.products-table,
+.products-table tbody,
+.products-table tr,
+.products-table td {
+    border: none;
+    background: transparent;
+}
+
+/* ===== УПРОЩЕННЫЕ СТИЛИ ДЛЯ КОНТАКТОВ ===== */
+.contacts-section {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-block {
+    margin-bottom: 30px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.contact-heading {
+    font-size: 18px;
+    color: #2c3e50;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 8px;
+}
+
+.contact-text {
+    color: #5a6c7d;
+    font-size: 16px;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.work-schedule {
+    margin: 15px 0;
+}
+
+.schedule-item {
+    color: #5a6c7d;
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.simple-contact-button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.simple-contact-button:hover {
+    background: #5a6fd8;
+}
+
+/* Убираем градиенты и сложные эффекты */
+.contact-block {
+    background: transparent;
+    border-left: none;
+}
+
+/* Адаптивность для контактов */
+@media (max-width: 768px) {
+    .contacts-section {
+        padding: 0 10px;
+    }
+    
+    .contact-heading {
+        font-size: 17px;
+    }
+    
+    .contact-text {
+        font-size: 15px;
+    }
+    
+    .simple-contact-button {
+        width: 100%;
+        padding: 15px;
+    }
+}
