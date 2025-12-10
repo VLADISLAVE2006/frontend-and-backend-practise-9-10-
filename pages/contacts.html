@@ -217,7 +217,7 @@
                     <h2 class="contact-heading">Телефон</h2>
                     <p class="contact-text">+7 (495) 123-45-67</p>
                     <p class="contact-text">+7 (800) 100-00-00 (бесплатно по России)</p>
-                    <!-- Изменяем существующую кнопку, чтобы открывала форму -->
+                    <!-- Кнопка для открытия формы -->
                     <button class="simple-contact-button" onclick="contactModal.showModal()">
                         Связаться с нами
                     </button>
@@ -245,7 +245,7 @@
             </div>
 
             <div class="modal-content">
-                <form id="feedbackForm" method="dialog">
+                <form id="feedbackForm">
                     <div class="form-group">
                         <label for="name">Имя <span class="required">*</span></label>
                         <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
@@ -276,8 +276,8 @@
                     </div>
 
                     <div class="modal-actions">
-                        <!-- Кнопка отмены с автоматическим закрытием через form method="dialog" -->
-                        <button type="submit" class="btn">Отмена</button>
+                        <!-- Кнопка отмены для закрытия модального окна -->
+                        <button type="button" class="btn" onclick="closeForm()">Отмена</button>
                         <!-- Кнопка отправки с обработкой через JavaScript -->
                         <button type="button" class="btn btn-primary" onclick="submitForm()">Отправить</button>
                     </div>
@@ -286,16 +286,26 @@
         </dialog>
         
         <script>
+            // Получаем элементы
+            const contactModal = document.getElementById('contactModal');
+            const feedbackForm = document.getElementById('feedbackForm');
+            
+            // Функция для закрытия формы
+            function closeForm() {
+                contactModal.close();
+                feedbackForm.reset();
+            }
+            
             // Функция для отправки формы
             function submitForm() {
-                const form = document.getElementById('feedbackForm');
-                const formData = new FormData(form);
+                const formData = new FormData(feedbackForm);
 
                 // Простая валидация
-                if (!form.checkValidity()) {
-                    form.reportValidity();
+                if (!feedbackForm.checkValidity()) {
+                    feedbackForm.reportValidity();
                     return;
                 }
+                
                 // Собираем данные формы
                 const data = {
                     name: formData.get('name'),
@@ -304,6 +314,7 @@
                     category: formData.get('category'),
                     message: formData.get('message')
                 };
+                
                 // В реальном приложении здесь был бы AJAX-запрос
                 console.log('Данные формы:', data);
 
@@ -311,27 +322,29 @@
                 alert('Спасибо! Ваше обращение отправлено. Мы свяжемся с вами в ближайшее время.');
 
                 // Закрываем модальное окно
-                contactModal.close();
-
-                // Очищаем форму
-                form.reset();
+                closeForm();
             }
             
             // Закрытие модального окна по клику на фон
-            document.getElementById('contactModal').addEventListener('click',
-                function (event) {
-                    if (event.target === this) {
-                        this.close();
-                    }
-                });
+            contactModal.addEventListener('click', function (event) {
+                if (event.target === this) {
+                    closeForm();
+                }
+            });
             
             // Обработка отправки формы через Enter (предотвращаем стандартное поведение)
-            document.getElementById('feedbackForm').addEventListener('keypress',
-                function (event) {
-                    if (event.key === 'Enter' && event.target.type !== 'textarea') {
-                        event.preventDefault();
-                    }
-                });
+            feedbackForm.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter' && event.target.type !== 'textarea') {
+                    event.preventDefault();
+                }
+            });
+            
+            // Закрытие формы по нажатию Escape
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && contactModal.open) {
+                    closeForm();
+                }
+            });
         </script>
     </div>
 </body>
