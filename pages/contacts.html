@@ -5,6 +5,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - Семестровая работа</title>
     <link rel="stylesheet" href="../style/styles.css">
+    <style>
+        /* Стили для модального окна */
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s ease;
+        }
+
+        dialog {
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+            max-width: 500px;
+            width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .modal-header {
+            background: #fff;
+            color: #000;
+            padding: 24px 32px 16px;
+            border-bottom: 1px solid #e0e0e0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #000;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-content {
+            padding: 24px 32px 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+            font-family: inherit;
+            background: #fff;
+            color: #333;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #666;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: inherit;
+            background: #fff;
+            color: #333;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #f5f5f5;
+        }
+
+        .btn-primary {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+            border-color: #333;
+        }
+
+        .required {
+            color: #ff0000;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Стили для placeholder */
+        ::placeholder {
+            color: #999;
+            opacity: 1;
+        }
+
+        :-ms-input-placeholder {
+            color: #999;
+        }
+
+        ::-ms-input-placeholder {
+            color: #999;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            dialog {
+                margin: 1rem;
+                width: calc(100vw - 2rem);
+            }
+
+            .modal-actions {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .btn {
+                flex: 1;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="page-container">
@@ -42,8 +217,9 @@
                     <h2 class="contact-heading">Телефон</h2>
                     <p class="contact-text">+7 (495) 123-45-67</p>
                     <p class="contact-text">+7 (800) 100-00-00 (бесплатно по России)</p>
-                    <button class="simple-contact-button" onclick="alert('Функция звонка будет реализована в следующей версии. Звоните по номеру: +7 (495) 123-45-67')">
-                        Позвоните мне
+                    <!-- Изменяем существующую кнопку, чтобы открывала форму -->
+                    <button class="simple-contact-button" onclick="contactModal.showModal()">
+                        Связаться с нами
                     </button>
                 </div>
                 
@@ -61,6 +237,102 @@
         <footer class="footer">
             <p>© 2025 Контрольная работа. Все права защищены.</p>
         </footer>
+        
+        <!-- Модальное окно для формы обратной связи -->
+        <dialog id="contactModal">
+            <div class="modal-header">
+                <h2>Форма обратной связи</h2>
+            </div>
+
+            <div class="modal-content">
+                <form id="feedbackForm" method="dialog">
+                    <div class="form-group">
+                        <label for="name">Имя <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+7 (XXX) XXX-XX-XX">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Электронная почта <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="example@mail.ru">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Категория обращения <span class="required">*</span></label>
+                        <select id="category" name="category" required>
+                            <option value="" disabled selected>Выберите категорию</option>
+                            <option value="technical">Техническая поддержка</option>
+                            <option value="commercial">Коммерческое предложение</option>
+                            <option value="cooperation">Сотрудничество</option>
+                            <option value="complaint">Жалоба</option>
+                            <option value="suggestion">Предложение</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Текст обращения <span class="required">*</span></label>
+                        <textarea id="message" name="message" required placeholder="Опишите вашу проблему или вопрос..."></textarea>
+                    </div>
+
+                    <div class="modal-actions">
+                        <!-- Кнопка отмены с автоматическим закрытием через form method="dialog" -->
+                        <button type="submit" class="btn">Отмена</button>
+                        <!-- Кнопка отправки с обработкой через JavaScript -->
+                        <button type="button" class="btn btn-primary" onclick="submitForm()">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+        
+        <script>
+            // Функция для отправки формы
+            function submitForm() {
+                const form = document.getElementById('feedbackForm');
+                const formData = new FormData(form);
+
+                // Простая валидация
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                // Собираем данные формы
+                const data = {
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    category: formData.get('category'),
+                    message: formData.get('message')
+                };
+                // В реальном приложении здесь был бы AJAX-запрос
+                console.log('Данные формы:', data);
+
+                // Показываем уведомление об успешной отправке
+                alert('Спасибо! Ваше обращение отправлено. Мы свяжемся с вами в ближайшее время.');
+
+                // Закрываем модальное окно
+                contactModal.close();
+
+                // Очищаем форму
+                form.reset();
+            }
+            
+            // Закрытие модального окна по клику на фон
+            document.getElementById('contactModal').addEventListener('click',
+                function (event) {
+                    if (event.target === this) {
+                        this.close();
+                    }
+                });
+            
+            // Обработка отправки формы через Enter (предотвращаем стандартное поведение)
+            document.getElementById('feedbackForm').addEventListener('keypress',
+                function (event) {
+                    if (event.key === 'Enter' && event.target.type !== 'textarea') {
+                        event.preventDefault();
+                    }
+                });
+        </script>
     </div>
 </body>
 </html>
